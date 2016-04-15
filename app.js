@@ -61,17 +61,12 @@ app.config(['$routeProvider', function ($routeProvider) {
     $rootScope.globals = $cookieStore.get('globals') || {};
     if ($rootScope.globals.currentUser) {
       $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
-      $scope.email = $rootScope.globals.currentUser.email;
-    } else {
-      $location.path('/login');
+      $scope.currentUser = $rootScope.globals.currentUser;
+
+      // send login state to scope
+      $scope.isLoggedIn = true;
     }
 
-    // send login state to scope
-    if ($rootScope.globals.currentUser) {
-      $scope.isLoggedIn = true;
-    } else {
-      $scope.isLoggedIn = false;
-    }
 
     $scope.logout = function() {
       AuthenticationService.ClearCredentials();
@@ -115,7 +110,7 @@ app.config(['$routeProvider', function ($routeProvider) {
   });
 
 
-  app.controller("RegisterCtrl", function ($scope, $rootScope, $location, AuthenticationService) {
+  app.controller("RegisterCtrl", function ($scope, $rootScope, $location, $window, AuthenticationService) {
     console.log("RegisterCtrl reporting for duty.");
 
     if ($rootScope.globals.currentUser) {
@@ -124,14 +119,27 @@ app.config(['$routeProvider', function ($routeProvider) {
 
 
 
-    $scope.createAccount = function() {
+    $scope.register = function() {
       if (!$scope.registerForm.$valid) {
         $scope.errorMessage = "Form is invalid";
       } else {
         $scope.errorMessage = "";
-        AuthenticationService.RegisterAccount($scope.inputEmail, $scope.inputPassword, function(response) {
+        AuthenticationService.RegisterAccount($scope.inputEmail, $scope.inputPassword1, function(response) {
+
           if (response.success) {
-            $scope.errorMessage = "Account creation success";
+            $scope.errorMessage = "Account creation success, now tring to log you in ...";
+            AuthenticationService.Login($scope.inputEmail, $scope.inputPassword1, function(response) {
+              if (response.success) {
+                AuthenticationService.SetCredentials($scope.inputEmail, $scope.inputPassword1);
+                var landingUrl = "http://" + $window.location.host + "/";
+                $window.location.href = landingUrl;
+              } else {
+                $scope.errorMessage = "Login went wrong :/";
+              }
+
+            });
+
+            // send an on-screen notification for redirection
             $location.path('/');
           } else {
             $scope.errorMessage = "WEBSERVICE GOT WRONG F**K";

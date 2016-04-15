@@ -41,6 +41,9 @@
         var response = { success: email == 'test@test' };
         if(!response.success) {
           response.message = 'Error during user creation. Please try again later';
+          console.log("error during user creation");
+        } else {
+          console.log("user creation success");
         }
         callback(response);
       }, 1000);
