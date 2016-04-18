@@ -3,11 +3,11 @@ var app = angular.module('app', ['ngRoute', 'ngCookies']);
 
 app.run(['$http','$rootScope','$cookieStore', function($http,$rootScope,$cookieStore) {
   // keep user logged in after page refresh
-  $rootScope.globals = $cookieStore.get('globals') || {};
+/*  $rootScope.globals = $cookieStore.get('globals') || {};
   if ($rootScope.globals.currentUser) {
     $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
   }
-  $rootScope.whatever ="what";
+  $rootScope.whatever ="what";*/
 }]);
 
 // Directives
@@ -52,29 +52,21 @@ app.config(['$routeProvider', function ($routeProvider) {
     });
   }]);
 
+
+
   // Controllers
   app.controller("MainCtrl", function ($scope, $rootScope, $http, $location, $cookieStore, $window, AuthenticationService) {
     console.log("MainCtrl reporting for duty.");
-    $scope.welcome = "Hello word, welcome on board";
-
+    
     // keep user logged in after page refresh
     $rootScope.globals = $cookieStore.get('globals') || {};
     if ($rootScope.globals.currentUser) {
       $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
       $scope.currentUser = $rootScope.globals.currentUser;
-
-      // send login state to scope
-      $scope.isLoggedIn = true;
-    }
-
-
-    $scope.logout = function() {
-      AuthenticationService.ClearCredentials();
-      var landingUrl = "http://" + $window.location.host + "/";
-      $window.location.href = landingUrl;
     }
 
   });
+
 
   app.controller("LoginCtrl", function ($scope, $window, AuthenticationService) {
     console.log("LoginCtrl reporting for duty.");
@@ -94,6 +86,12 @@ app.config(['$routeProvider', function ($routeProvider) {
       });
     };
 
+    $scope.logout = function() {
+      AuthenticationService.ClearCredentials();
+      //todo : add httpS support
+      var landingUrl = "http://" + $window.location.host + "/";
+      $window.location.href = landingUrl;
+    }
 
 
   });

@@ -12,6 +12,8 @@
     service.Base64 = Base64;
     return service;
 
+
+
     function Login(email, password, callback) {
       console.log("received login request with email : "+email);
 
@@ -49,6 +51,8 @@
       }, 1000);
     }
 
+
+
     function SetCredentials(email, password) {
       var authdata = Base64().encode(email + ':' + password);
       //var authdata = "123456";
@@ -65,6 +69,10 @@
       console.log("credential set");
     }
 
+
+
+
+
     function ClearCredentials() {
       $rootScope.globals = {};
       $cookieStore.remove('globals');
@@ -72,6 +80,17 @@
       console.log("credential cleared");
     }
 
+
+
+
+
+
+
+
+
+
+
+    // Base64 hash method
     function Base64() {
       /* jshint ignore:start */
       var keyStr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
