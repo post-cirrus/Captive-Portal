@@ -1,5 +1,5 @@
 // public/app.js
-var app = angular.module('app', ['ngRoute', 'ngCookies']);
+var app = angular.module('app', ['ngRoute', 'ngCookies', 'logToServer']);
 
 app.run(['$http','$rootScope','$cookieStore', function($http,$rootScope,$cookieStore) {
   // keep user logged in after page refresh
@@ -52,12 +52,16 @@ app.config(['$routeProvider', function ($routeProvider) {
     });
   }]);
 
+  // Add logToServerInterceptor
+  app.config(['$httpProvider', function ($httpProvider) {
+    $httpProvider.interceptors.push('logToServerInterceptor');
+  }]);
 
 
   // Controllers
-  app.controller("MainCtrl", function ($scope, $rootScope, $http, $location, $cookieStore, $window, AuthenticationService) {
-    console.log("MainCtrl reporting for duty.");
-    
+  app.controller("MainCtrl", function ($scope, $rootScope, $http, $location, $cookieStore, $window, $log, AuthenticationService) {
+    $log.debug("MainCtrl reporting for duty.");
+
     // keep user logged in after page refresh
     $rootScope.globals = $cookieStore.get('globals') || {};
     if ($rootScope.globals.currentUser) {
@@ -68,8 +72,8 @@ app.config(['$routeProvider', function ($routeProvider) {
   });
 
 
-  app.controller("LoginCtrl", function ($scope, $window, AuthenticationService) {
-    console.log("LoginCtrl reporting for duty.");
+  app.controller("LoginCtrl", function ($scope, $window, $log, AuthenticationService) {
+    $log.debug("LoginCtrl reporting for duty.");
 
     $scope.login = function() {
       $scope.dataLoading = true
@@ -96,8 +100,8 @@ app.config(['$routeProvider', function ($routeProvider) {
 
   });
 
-  app.controller("AccountCtrl", function ($scope, $rootScope, $location) {
-    console.log("AccountCtrl reporting for duty.");
+  app.controller("AccountCtrl", function ($scope, $rootScope, $log, $location) {
+    $log.debug("AccountCtrl reporting for duty.");
 
     if (!$rootScope.globals.currentUser) {
       $location.path('/login');
@@ -108,8 +112,8 @@ app.config(['$routeProvider', function ($routeProvider) {
   });
 
 
-  app.controller("RegisterCtrl", function ($scope, $rootScope, $location, $window, AuthenticationService) {
-    console.log("RegisterCtrl reporting for duty.");
+  app.controller("RegisterCtrl", function ($scope, $rootScope, $location, $window, $log, AuthenticationService) {
+    $log.debug("RegisterCtrl reporting for duty.");
 
     if ($rootScope.globals.currentUser) {
       $location.path('/account');

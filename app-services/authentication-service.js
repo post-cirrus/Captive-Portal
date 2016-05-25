@@ -2,7 +2,7 @@
 
   angular.module('app').service('AuthenticationService', AuthenticationService);
 
-  function AuthenticationService($timeout, $http, $rootScope, $cookieStore) {
+  function AuthenticationService($timeout, $http, $rootScope, $log, $cookieStore) {
 
     var service = {};
     service.Login = Login;
@@ -15,7 +15,7 @@
 
 
     function Login(email, password, callback) {
-      console.log("received login request with email : "+email);
+      $log.debug("received login request with email : "+email);
 
       // Dummy authentication
       $timeout(function(){
@@ -36,16 +36,16 @@
     }
 
     function RegisterAccount(email, password, callback) {
-      console.log("received account creation request with email : "+email);
+      $log.debug("received account creation request with email : "+email);
 
       // Dummy registration
       $timeout(function(){
         var response = { success: email == 'test@test' };
         if(!response.success) {
           response.message = 'Error during user creation. Please try again later';
-          console.log("error during user creation");
+          $log.debug("error during user creation");
         } else {
-          console.log("user creation success");
+          $log.debug("user creation success");
         }
         callback(response);
       }, 1000);
@@ -66,7 +66,7 @@
 
       $http.defaults.headers.common['Authorization'] = 'Basic' + authdata;
       $cookieStore.put('globals', $rootScope.globals);
-      console.log("credential set");
+      $log.debug("credential set");
     }
 
 
@@ -77,7 +77,7 @@
       $rootScope.globals = {};
       $cookieStore.remove('globals');
       $http.defaults.headers.common.Authorization = 'Basic ';
-      console.log("credential cleared");
+      $log.debug("credential cleared");
     }
 
 
