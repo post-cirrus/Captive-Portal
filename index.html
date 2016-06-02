@@ -7,28 +7,35 @@
   <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
   <title>Cirrus Captive-Portal</title>
   <!-- Bootstrap -->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet">
 
 </head>
-<body ng-controller="MainCtrl">
+<body>
+  header
+  <a href="/#/">home</a>
+  <a href="/#/contact">contact</a>
 
-  <div ng-include="'templates/header.html'"></div>
+  <div ng-include="'app/components/header/headerView.html'"></div>
   <div ng-view></div>
-  <div ng-include="'templates/footer.html'"></div>
+  <div ng-include="'app/components/footer/footerView.html'"></div>
 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->
-  <script src="js/bootstrap.min.js"></script>
+  <script src="assets/js/bootstrap.min.js"></script>
+  <!-- jSNLog for Agnular -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsnlog/2.17.1/jsnlog.js" ></script>
   <!-- AngularJS -->
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-route.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-cookies.js"></script>
-  <script src="app.js"></script>
-  <script src="app-services/authentication-service.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsnlog/2.17.1/jsnlog.js" ></script>
-  <script src="app-services/logToServer.module.js"></script>
+  <script src="app/app.module.js"></script>
+  <script src="app/app.routes.js"></script>
+  <script src="app/logToServer.module.js"></script>
+  <!-- AngularJS components -->
+  <script src="app/components/contact/contactController.js"></script>
 
-  
+
+
 </body>
 </html>
