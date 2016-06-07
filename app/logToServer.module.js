@@ -40,10 +40,10 @@
                 'response': function (response) {
                     var msAfterAjaxCall = new Date().getTime();
                     var timeTakenInMs = msAfterAjaxCall - response.config.msBeforeAjaxCall;
-                    JL('Angular.Ajax').debug({
+                    /*JL('Angular.Ajax').debug({
                         url: response.config.url,
                         timeTakenInMs: timeTakenInMs
-                    });
+                    });*/
                     return response;
                 },
                 // The responseError function is called when an error response was received, or when a timeout happened.

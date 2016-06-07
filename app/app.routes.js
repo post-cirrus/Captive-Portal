@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  angular.module("app", ["ngRoute"]).config(routeInitFunc);
+  angular.module("app").config(routeInitFunc);
 
   function routeInitFunc($routeProvider, $locationProvider) {
 
@@ -13,21 +13,41 @@
 
     $routeProvider
     .when("/", {
-      templateUrl : "app/components/home/homeView.html"
+      templateUrl : "app/components/home/home.view.html"
     })
     .when("/contact", {
-      templateUrl : "app/components/contact/contactView.html"
+      templateUrl : "app/components/contact/contact.view.html"
+    })
+    .when("/login", {
+      templateUrl : "app/components/user/login.view.html"
+    })
+    .when("/register", {
+      templateUrl : "app/components/user/register.view.html"
+    })
+    .when("/account", {
+      templateUrl : "app/components/user/account.view.html"
     })
     // Error
     .otherwise(
       {
-        templateUrl: "app/components/404/404View.html"
+        templateUrl: "app/components/404/404.view.html"
       });
 
-      // configure html5 to get links working on jsfiddle
-      $locationProvider.html5Mode(true);
 
-      $log.debug("End of Configuring route provider");
+      //TODO : Need url rewrite to make html5 mode enabled
+      /*
+      //check browser support
+       if(window.history && window.history.pushState){
+         // $locationProvider.html5Mode(true); will cause an error $location in HTML5 mode requires a  tag to be present! Unless you set baseUrl tag after head tag like so: <head> <base href="/">
+         // to know more about setting base URL visit: https://docs.angularjs.org/error/$location/nobase
+         // if you don't wish to set base URL then use this
+        $locationProvider.html5Mode({
+                enabled: true,
+                requireBase: false
+         });
+       }*/
+
+      //$log.debug("End of Configuring route provider");
     }
 
   })();

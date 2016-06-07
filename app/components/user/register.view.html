@@ -1,0 +1,24 @@
+<div class="container" ng-controller="UserCtrl as vm">
+  <div class="col-md-6 col-md-offset-3">
+    <h2>Create your Cirrus account</h2>
+    <form name="vm.registerForm" ng-submit="vm.register()">
+      <div class="form-group">
+        <label for="vm.inputEmail">Email address:</label>
+        <input type="email" class="form-control" placeholder="Email" id="vm.inputEmail" name="vm.inputEmail" ng-model="vm.inputEmail" required>
+      </div>
+      <div class="form-group">
+        <label for="vm.inputPassword">Password:</label>
+        <input type="password" class="form-control" placeholder="Password" id="vm.inputPassword" name="vm.inputPassword" ng-model="vm.inputPassword" required>
+      </div>
+      <div class="form-group">
+        <label for="vm.inputPassword2">Confirm password:</label>
+        <input type="password" class="form-control" placeholder="Password" id="vm.inputPassword2" name="vm.inputPassword2" ng-model="vm.inputPassword2" pw-check="vm.inputPassword" required>
+      </div>
+      <div ng-if="vm.error" class="alert alert-danger fade in">
+          <span class="close" data-dismiss="alert">&times;</span>
+          <strong>Error!</strong> {{vm.error }}
+      </div>
+      <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+  </div>
+</div>
