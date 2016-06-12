@@ -1,3 +1,5 @@
+<div ng-include="'app/components/header/header.view.html'"></div>
+
 <div class="container" ng-controller="UserCtrl as vm">
   <div class="col-md-6 col-md-offset-3">
     <h2>Create your Cirrus account</h2>
@@ -14,11 +16,13 @@
         <label for="vm.inputPassword2">Confirm password:</label>
         <input type="password" class="form-control" placeholder="Password" id="vm.inputPassword2" name="vm.inputPassword2" ng-model="vm.inputPassword2" pw-check="vm.inputPassword" required>
       </div>
-      <div ng-if="vm.error" class="alert alert-danger fade in">
+      <!--<div ng-if="vm.error" class="alert alert-danger fade in">
           <span class="close" data-dismiss="alert">&times;</span>
           <strong>Error!</strong> {{vm.error }}
-      </div>
+      </div>-->
       <button type="submit" class="btn btn-primary">Register</button>
     </form>
   </div>
 </div>
+
+<div ng-include="'app/components/footer/footer.view.html'"></div>

@@ -62,6 +62,11 @@
 
         // Inject Angular $location object and set options
         .run(function($location) {
+
+
+          var consoleAppender=JL.createConsoleAppender('consoleAppender');
+          JL('Angular').setOptions({"appenders": [consoleAppender]});
+
           JL.setOptions({
               'defaultAjaxUrl': 'http://logger.cirrus.io:9997/jsnlog.logger',
               'requestId': $location.url()

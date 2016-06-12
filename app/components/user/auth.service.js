@@ -23,11 +23,13 @@
       // Dummy authentication
       $timeout(function(){
         var response = { success: email == 'test@test.test' && password === 'test' };
-        if(!response.success) {
+
+        if(response.success) {
+          $log.debug("AuthenticationService::Login - login success");
+        } else {
           $log.debug("AuthenticationService::Login - login incorrect");
           response.message = 'Username or password is incorrect';
         }
-        $log.debug("AuthenticationService::Login - login success");
         callback(response);
       }, 1000);
 

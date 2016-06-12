@@ -27,6 +27,10 @@
     .when("/account", {
       templateUrl : "app/components/user/account.view.html"
     })
+    .when("/plans", {
+      templateUrl : "app/components/plan/plans.view.html"
+    })
+
     // Error
     .otherwise(
       {
