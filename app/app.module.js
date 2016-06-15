@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  angular.module("app", ["ngRoute", "ngCookies", "logToServer", "ngToast"])
+  angular.module("app", ["ui.router", "ngCookies", "ngToast"])
   /*.config(['$httpProvider', function ($httpProvider) {
     $httpProvider.interceptors.push('logToServerInterceptor');
   }])*/
@@ -12,8 +12,15 @@
       verticalPosition: "bottom"
     });
   }])
-  .run(function($log) {
+  .run(function($log, $rootScope, $cookieStore) {
     $log.debug("App now running");
+
+    // Read cookie, and push current user in rootscope
+    /*$rootScope.globals = $cookieStore.get('globals') || {};
+    if ($rootScope.globals.currentUser) {
+      $rootScope.currentUser = $rootScope.globals.currentUser;
+    }*/
+
   });
 
 })();

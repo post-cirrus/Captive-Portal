@@ -1,5 +1,3 @@
-<div ng-include="'app/components/header/header.view.html'"></div>
-
 <div class="container" ng-controller="UserCtrl as vm">
   <h2>Welcome on your account management page</h2>
 
@@ -8,12 +6,10 @@
   </div>
 
   <div class="row">
-    <a class="btn btn-primary" href="#/plans">Select a plan</a>
+    <a class="btn btn-primary" ui-sref="app.plan">Select a plan</a>
   </div>
 
   <div class="row">
     <button class="btn btn-danger" ng-click="vm.logout()">Logout</button>
   </div>
 </div>
-
-<div ng-include="'app/components/footer/footer.view.html'"></div>

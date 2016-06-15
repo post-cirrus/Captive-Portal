@@ -3,29 +3,27 @@
 
     angular.module("app").controller("UserCtrl", UserCtrl);
 
-    function UserCtrl($rootScope, $cookieStore, $location, $window, $log, $injector, $route, $templateCache, ngToast, AuthenticationService) {
+    function UserCtrl($rootScope, $location, $window, $log, $state, ngToast, AuthenticationService, SessionService) {
 
       $log.debug("UserCtrl reporting for duty.");
 
       var vm = this;
-
-      // Read cookie, and push current user in rootscope
-      $rootScope.globals = $cookieStore.get('globals') || {};
-      if ($rootScope.globals.currentUser) {
-        vm.currentUser = $rootScope.globals.currentUser;
-      }
+      SessionService.pushSession(vm);
 
       // Generic method to check if user already logged in, and if yes just redirect to account page
       vm.checkIfLoggedIn = function() {
         $log.debug("UserCtrl::checkIfLoggedIn - Verify if user is already logged in ...");
         if ($rootScope.globals.currentUser) {
           $log.debug("UserCtrl::checkIfLoggedIn - User already logged in->redirect to account page");
-          $location.path("/account");
+          $state.go("app.account");
+
         } else {
           $log.debug("UserCtrl::checkIfLoggedIn - User not logged in " + $location.path());
-          if ($location.path() != "/login" && $location.path() != "/register") {
-            $location.path("/login");
-          }
+
+        /*  if ($location.path() != "/login" && $location.path() != "/register") {
+            $state.go("app.login");
+          }*/
+
         }
       }
 
@@ -51,7 +49,8 @@
             //$location.path("/");
             //var currentPageTemplate = $route.current.templateUrl;
             //$templateCache.remove(currentPageTemplate);
-            $route.reload();
+
+            $state.reload();
 
           } else {
             ngToast.danger("Error ! "+response.message);
@@ -69,7 +68,8 @@
 
         //var landingUrl = "http://" + $window.location.host + "/";
         //$window.location.href = landingUrl;
-        $route.reload();
+
+        $state.reload();
 
       };
 
@@ -78,7 +78,6 @@
       // register function
       vm.register = function() {
         $log.debug("UserCtrl::register function.");
-        vm.checkIfLoggedIn();
 
         if (!vm.registerForm.$valid) {
           $log.debug("UserCtrl::register - Form is invalid - probably passowrd do not match. pwCheck directive says it.");

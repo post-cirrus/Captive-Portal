@@ -15,7 +15,6 @@
     service.Base64 = Base64;
     return service;
 
-
     // Login function : the business logic to verify if account exists and is valid
     function Login(email, password, callback) {
       $log.debug("AuthenticationService::Login - Receive login request with email:" + email);
