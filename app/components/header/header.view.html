@@ -16,7 +16,7 @@
       <ul class="nav navbar-nav">
         <li><a ui-sref="app">Home</a></li>
       </ul>
-      <ul class="nav navbar-nav navbar-right" ng-controller="HeaderCtrl as vm">
+      <ul class="nav navbar-nav navbar-right">
         <li ng-if="vm.currentUser"><a ui-sref=".account">{{ vm.currentUser.email }}</a></li>
         <li><a ng-if="!vm.currentUser" ui-sref=".login">Login</a></li>
         <li><a ui-sref=".contact">Contact</a></li>

@@ -12,15 +12,9 @@
       verticalPosition: "bottom"
     });
   }])
-  .run(function($log, $rootScope, $cookieStore) {
-    $log.debug("App now running");
-
-    // Read cookie, and push current user in rootscope
-    /*$rootScope.globals = $cookieStore.get('globals') || {};
-    if ($rootScope.globals.currentUser) {
-      $rootScope.currentUser = $rootScope.globals.currentUser;
-    }*/
-
+  .constant('API', 'http://test-routes.herokuapp.com')
+  .run(function($log, API) {
+    $log.debug("App now running : "+API);
   });
 
 })();

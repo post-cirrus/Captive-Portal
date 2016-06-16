@@ -1,0 +1,15 @@
+<h1>Simple Angular Auth - Thinkster</h1>
+
+   <input type="text" ng-model="main.username" placeholder="username"><br>
+   <input type="password" ng-model="main.password" placeholder="password"><br>
+   <br>
+
+   <button ng-click="main.register()">Register</button>
+   <button ng-click="main.login()">Login</button>
+   <button ng-click="main.logout()" ng-show="main.isAuthed()">Logout</button>
+
+   <button ng-click="main.getQuote()">get quote</button>
+   <br><br>
+   {{main.message}}
+
+   <br><br><br>

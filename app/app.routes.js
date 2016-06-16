@@ -1,4 +1,4 @@
-(function() {
+;(function() {
   'use strict';
 
   angular.module("app").config(routeInitFunc);
@@ -18,10 +18,12 @@
       url: "/",
       views: {
         "header": {
+          controller: "HeaderCtrl as vm",
           templateUrl: "app/components/header/header.view.html"
         },
         "content": {
-          templateUrl : "app/components/home/home.view.html"
+          controller: "UserCtrl as main",
+          templateUrl : "app/components/auth/jwt.view.html"
         },
         "footer": {
           templateUrl: "app/components/footer/footer.view.html"
@@ -32,6 +34,13 @@
       url: "/login",
       views: {
         "content@": {
+          resolve : {
+            plopUser : function() {
+              $log.debug("resolver");
+              return "plopresolv";
+            }
+          },
+          controller: "UserCtrl as vm",
           templateUrl : "app/components/user/login.view.html"
         }
       }
@@ -40,6 +49,7 @@
       url: "/register",
       views: {
         "content@": {
+          controller : "UserCtrl as vm",
           templateUrl : "app/components/user/register.view.html"
         }
       }
@@ -48,6 +58,7 @@
       url: "/account",
       views: {
         "content@": {
+          controller : "UserCtrl as vm",
           templateUrl : "app/components/user/account.view.html"
         }
       }
@@ -56,6 +67,7 @@
       url: "/plan",
       views: {
         "content@": {
+          controller : "UserCtrl as vm",
           templateUrl : "app/components/plan/plan.view.html"
         }
       }
@@ -64,6 +76,7 @@
       url: "/contact",
       views: {
         "content@": {
+          controller: "ContactCtrl as vm",
           templateUrl : "app/components/contact/contact.view.html"
         }
       }
