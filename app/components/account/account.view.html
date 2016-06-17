@@ -3,13 +3,14 @@
 
   <div class="row">
     <p>Yourname is : {{ vm.currentUser.email }}</p>
+    {{ vm.message }} fdfd
   </div>
 
   <div class="row">
-    <a class="btn btn-primary" ui-sref="app.plan">Select a plan</a>
+    <button type="button" class="btn btn-primary" ui-sref="app.plan">Select a plan</button>
   </div>
 
   <div class="row">
-    <button class="btn btn-danger" ng-click="vm.logout()">Logout</button>
+    <button type="button" class="btn btn-danger" ng-click="">Logout</button>
   </div>
 </div>

@@ -1,12 +1,21 @@
 ;(function() {
 'use strict';
 
+/**
+
+  This service handles the JWT layer and token management.
+  To be used by the 'user' service only
+
+*/
+
 angular.module("app")
     .factory('authInterceptor', authInterceptor)
     .service('auth', authService)
     .config(function($httpProvider) {
       $httpProvider.interceptors.push('authInterceptor');
     });
+
+
 
 function authInterceptor(API, auth) {
   return {
@@ -43,6 +52,7 @@ function authService($window) {
 
   self.saveToken = function(token) {
     $window.localStorage['jwtToken'] = token;
+    console.log("saving new token");
   }
 
   self.getToken = function() {

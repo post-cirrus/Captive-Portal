@@ -1,9 +1,9 @@
 ;(function() {
 'use strict';
 
-angular.module("app").service('user', userService);
+angular.module('app').service('user', userService);
 
-function userService($http, API, auth) {
+function userService($http, API) {
   var self = this;
 
   self.getQuote = function() {
@@ -23,9 +23,6 @@ function userService($http, API, auth) {
       password: password
     })
   };
-
-  // add authentication methods here
-
 }
 
 })();
